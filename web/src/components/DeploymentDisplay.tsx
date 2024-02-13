@@ -131,12 +131,12 @@ export function DeploymentDisplay({
               <CodeBlock
                 lang="js"
                 code={formatCode(
-                  domain == "https://www.comfydeploy.com"
+                  domain == "https://www.getsalt.ai"
                     ? jsClientSetupTemplateHostedVersion
                     : jsClientSetupTemplate,
                   deployment,
                   domain,
-                  workflowInput,
+                  workflowInput
                 )}
               />
               Create a run via deployment id
@@ -148,7 +148,7 @@ export function DeploymentDisplay({
                     : jsClientCreateRunNoInputsTemplate,
                   deployment,
                   domain,
-                  workflowInput,
+                  workflowInput
                 )}
               />
               Check the status of the run, and retrieve the outputs
@@ -157,7 +157,7 @@ export function DeploymentDisplay({
                 code={formatCode(
                   clientTemplate_checkStatus,
                   deployment,
-                  domain,
+                  domain
                 )}
               />
             </TabsContent>
@@ -195,7 +195,7 @@ function formatCode(
   deployment: Awaited<ReturnType<typeof findAllDeployments>>[0],
   domain: string,
   inputs?: ReturnType<typeof getInputsFromWorkflow>,
-  inputsTabs?: number,
+  inputsTabs?: number
 ) {
   if (inputs && inputs.length > 0) {
     codeTemplate = codeTemplate.replace(
@@ -204,20 +204,20 @@ function formatCode(
         Object.fromEntries(
           inputs.map((x) => {
             return [x?.input_id, ""];
-          }),
+          })
         ),
         null,
-        2,
+        2
       )
         .split("\n")
         .map((line, index) => (index === 0 ? line : `    ${line}`)) // Add two spaces indentation except for the first line
-        .join("\n")}`,
+        .join("\n")}`
     );
   } else {
     codeTemplate = codeTemplate.replace(
       `
     inputs: {}`,
-      "",
+      ""
     );
   }
   return codeTemplate

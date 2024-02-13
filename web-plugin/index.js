@@ -36,7 +36,7 @@ const ext = {
 
       loadingDialog.showLoading(
         "Loading workflow from " + org_display,
-        "Please wait...",
+        "Please wait..."
       );
       fetch(endpoint + "/api/workflow-version/" + workflow_version_id, {
         method: "GET",
@@ -61,7 +61,7 @@ const ext = {
           window.history.replaceState(
             {},
             document.title,
-            window.location.pathname,
+            window.location.pathname
           );
         });
     }
@@ -85,21 +85,21 @@ const ext = {
           this,
           "workflow_name",
           ["", { default: this.properties.workflow_name, multiline: false }],
-          app,
+          app
         );
 
         ComfyWidgets.STRING(
           this,
           "workflow_id",
           ["", { default: this.properties.workflow_id, multiline: false }],
-          app,
+          app
         );
 
         ComfyWidgets.STRING(
           this,
           "version",
           ["", { default: this.properties.version, multiline: false }],
-          app,
+          app
         );
 
         // this.widgets.forEach((w) => {
@@ -126,7 +126,7 @@ const ext = {
         title_mode: LiteGraph.NORMAL_TITLE,
         title: "Comfy Deploy",
         collapsable: true,
-      }),
+      })
     );
 
     ComfyDeploy.category = "deploy";
@@ -160,7 +160,7 @@ const ext = {
 
 function showError(title, message) {
   infoDialog.show(
-    `<h3 style="margin: 0px; color: red;">${title}</h3><br><span>${message}</span> `,
+    `<h3 style="margin: 0px; color: red;">${title}</h3><br><span>${message}</span> `
   );
 }
 
@@ -181,7 +181,7 @@ function addButton() {
     if (!snapshot) {
       showError(
         "Error when deploying",
-        "Unable to generate snapshot, please install ComfyUI Manager",
+        "Unable to generate snapshot, please install ComfyUI Manager"
       );
       return;
     }
@@ -193,7 +193,7 @@ function addButton() {
     if (deployMeta.length == 0) {
       const text = await inputDialog.input(
         "Create your deployment",
-        "Workflow name",
+        "Workflow name"
       );
       if (!text) return;
       console.log(text);
@@ -233,7 +233,7 @@ function addButton() {
 
     const ok = await confirmDialog.confirm(
       "Confirm deployment -> " + displayName,
-      "A new version will be deployed, are you conform?",
+      "A new version will be deployed, are you conform?"
     );
     if (!ok) return;
 
@@ -283,7 +283,7 @@ function addButton() {
       graph.change();
 
       infoDialog.show(
-        `<span style="color:green;">Deployed successfully!</span>  <a style="color:white;" target="_blank" href=${endpoint}/workflows/${data.workflow_id}>-> View here</a> <br/> <br/> Workflow ID: ${data.workflow_id} <br/> Workflow Name: ${workflow_name} <br/> Workflow Version: ${data.version} <br/>`,
+        `<span style="color:green;">Deployed successfully!</span>  <a style="color:white;" target="_blank" href=${endpoint}/workflows/${data.workflow_id}>-> View here</a> <br/> <br/> Workflow ID: ${data.workflow_id} <br/> Workflow Name: ${workflow_name} <br/> Workflow Version: ${data.version} <br/>`
       );
 
       setTimeout(() => {
@@ -472,7 +472,7 @@ export class InputDialog extends InfoDialog {
               }
             },
           }),
-        ],
+        ]
       ),
     ];
   }
@@ -533,7 +533,7 @@ export class ConfirmDialog extends InfoDialog {
               this.close();
             },
           }),
-        ],
+        ]
       ),
     ];
   }
@@ -570,7 +570,7 @@ function getData(environment) {
   if (!data) {
     if (deployOption == "cloud")
       return {
-        endpoint: "https://www.comfydeploy.com",
+        endpoint: "https://www.getsalt.ai",
         apiKey: "",
       };
     else
@@ -592,7 +592,7 @@ function getData(environment) {
 function saveData(data) {
   localStorage.setItem(
     "comfy_deploy_env_data_" + data.environment,
-    JSON.stringify(data),
+    JSON.stringify(data)
   );
 }
 
@@ -635,7 +635,7 @@ export class ConfigDialog extends ComfyDialog {
             textContent: "Save",
             onclick: () => this.save(),
           }),
-        ],
+        ]
       ),
     ];
   }
@@ -673,8 +673,12 @@ export class ConfigDialog extends ComfyDialog {
     <h3 style="margin: 0px;">Comfy Deploy Config</h3>
     <label style="color: white; width: 100%;">
       <select id="deployOption" style="margin: 8px 0px; width: 100%; height:30px; box-sizing: border-box;" >
-        <option value="cloud" ${data.environment === "cloud" ? "selected" : ""}>Cloud</option>
-        <option value="local" ${data.environment === "local" ? "selected" : ""}>Local</option>
+        <option value="cloud" ${
+          data.environment === "cloud" ? "selected" : ""
+        }>Cloud</option>
+        <option value="local" ${
+          data.environment === "local" ? "selected" : ""
+        }>Local</option>
       </select>
     </label>
       <label style="color: white; width: 100%;">
@@ -689,9 +693,7 @@ export class ConfigDialog extends ComfyDialog {
           data.apiKey
         }">
         <button id="loginButton" style="margin-top: 8px; width: 100%; height:40px; box-sizing: border-box; padding: 0px 6px;">
-          ${
-            data.apiKey ? "Re-login with ComfyDeploy" : "Login with ComfyDeploy"
-          }
+          ${data.apiKey ? "Re-login with Salt" : "Login with Salt"}
         </button>
       </label>
       </div>
@@ -708,7 +710,7 @@ export class ConfigDialog extends ComfyDialog {
         clearInterval(poll);
         infoDialog.showMessage(
           "Timeout",
-          "Wait too long for the response, please try re-login",
+          "Wait too long for the response, please try re-login"
         );
       }, 30000); // Stop polling after 30 seconds
 
@@ -724,7 +726,7 @@ export class ConfigDialog extends ComfyDialog {
               clearTimeout(this.timeout);
               infoDialog.showMessage(
                 "Authenticated",
-                "You will be able to upload workflow to " + json.name,
+                "You will be able to upload workflow to " + json.name
               );
             }
           })
