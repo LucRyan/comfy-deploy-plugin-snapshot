@@ -131,7 +131,7 @@ export function DeploymentDisplay({
               <CodeBlock
                 lang="js"
                 code={formatCode(
-                  domain == "https://www.getsalt.ai"
+                  domain == "https://getsalt.ai"
                     ? jsClientSetupTemplateHostedVersion
                     : jsClientSetupTemplate,
                   deployment,

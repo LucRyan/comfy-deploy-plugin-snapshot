@@ -570,7 +570,7 @@ function getData(environment) {
   if (!data) {
     if (deployOption == "cloud")
       return {
-        endpoint: "https://www.getsalt.ai",
+        endpoint: "https://getsalt.ai",
         apiKey: "",
       };
     else
